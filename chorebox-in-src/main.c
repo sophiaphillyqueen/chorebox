@@ -110,7 +110,7 @@ int main ( int argc, char **argv, char **env )
   chorebox_apend_string(&prefix_directory,home_directory);
   chorebox_apend_string(&prefix_directory,"/chorebox_sys");
   if_not_specified("prefix",prefix_directory);
-  if_not_specified("oldincludedir","");
+  // if_not_specified("oldincludedir","");
   
   
   chorebox_str_lis_apnd(&final_comand,"sh");
