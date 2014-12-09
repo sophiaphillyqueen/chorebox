@@ -300,6 +300,8 @@ sub wardenize {
 &autom("runstatedir",$valvar{"localstatedir"} . "/run");
 &autom("includedir",$valvar{"prefix"} . "/include");
 
+&autom("chorebox_perl","chorebox-perl");
+
 # NOTE: Until further notice -chorebox- programs should only
 # *use* the "oldincludedir" variable with GREAT TREPIDATION.
 # The -chorebox-in- wrapper sets it to a value of empty
