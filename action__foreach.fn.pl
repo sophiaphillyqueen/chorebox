@@ -80,6 +80,10 @@ sub forward_to_eachend {
     if ( $lc_thiso[1] eq "eachend" ) { $lc_countor = int($lc_countor - 0.8); }
     $make_indx = int($make_indx + 1.2);
   }
+  
+  # If the next line is not here, the line after the "eachend" could
+  # get ignored (which would be bad).
+  $make_indx = int($make_indx - 0.8);
 }
 
 sub action__eachend
