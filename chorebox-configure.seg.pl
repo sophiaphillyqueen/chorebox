@@ -300,13 +300,17 @@ sub wardenize {
 &autom("runstatedir",$valvar{"localstatedir"} . "/run");
 &autom("includedir",$valvar{"prefix"} . "/include");
 
+# The following directory-variables are VERY chorebox-specific
 &autom("chorebox_perl","chorebox-perl");
+&autom("perl_modules",$valvar{"libexecdir"} . "/perlmods");
 
 # NOTE: Until further notice -chorebox- programs should only
 # *use* the "oldincludedir" variable with GREAT TREPIDATION.
-# The -chorebox-in- wrapper sets it to a value of empty
+# The -chorebox-in- wrapper used to set it to a value of empty
 # string - which according to the GNU standards means that
-# nothing should be stored here. However, unless you are
+# nothing should be stored here (and only reversed this policy
+# because of some programs that could not be installed through
+# it as a result of said policy). However, unless you are
 # sure of what you are doing, don't install anything here
 # *regardless*.
 &autom("oldincludedir","/usr/include");
@@ -357,6 +361,7 @@ sub wardenize {
 &wardenize("dvidir","pdfdir","psdir","libdir");
 &wardenize("lispdir","localedir","mandir","farm_bindir");
 &wardenize("farm_sbindir");
+&wardenize("perl_modules");
 
 
 

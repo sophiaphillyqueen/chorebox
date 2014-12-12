@@ -158,7 +158,7 @@
 :->:echo "use strict;"
 :*: >> products/tmp
 :->:echo "my @critiray=(\"
-:echo:var:perlloc:
+:echo:pls:var:perlloc:
 :*:\");"
 :*: >> products/tmp
 :foreach:chorebox-perl-prt:part:

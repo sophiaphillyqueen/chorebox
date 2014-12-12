@@ -47,6 +47,12 @@ sub meaning_of {
     return $strgvars{$lc_b[0]};
   }
   
+  if ( $lc_a[0] eq "env" )
+  {
+    @lc_b = split(/:/,$lc_a[1]);
+    return $ENV{$lc_b[0]};
+  }
+  
   if ( $lc_a[0] eq "dvar" )
   {
     @lc_b = split(/:/,$lc_a[1]);
@@ -147,6 +153,8 @@ sub meaning_of {
     return $lc2_b;
   }
   
+  # The 'shl' complex-type does reverse-escaping for shell-scripting assuming
+  # that the value it receives is stuff that would be enclosed in single-quotes.
   if ( $lc_a[0] eq "shl" )
   {
     my $lc2_a;
@@ -161,6 +169,31 @@ sub meaning_of {
       $lc2_c = chop($lc2_a);
       $lc2_d = $lc2_c;
       if ( $lc2_d eq "'" ) { $lc2_c = "'\"'\"'"; }
+      $lc2_b = $lc2_c . $lc2_b;
+    }
+    return $lc2_b;
+  }
+  
+  # The 'pls' does reverse-escaping with the assumption that it is passed
+  # stuff that is inside a PERL string -- once it has been fully debugged
+  # it will, that is.
+  if ( $lc_a[0] eq "pls" )
+  {
+    my $lc2_a;
+    my $lc2_b;
+    my $lc2_c;
+    my $lc2_d;
+    
+    $lc2_a = &meaning_of($lc_a[1]);
+    $lc2_b = "";
+    while ( $lc2_a ne "" )
+    {
+      $lc2_c = chop($lc2_a);
+      $lc2_d = $lc2_c;
+      if ( $lc2_d eq "\'" ) { $lc2_c = "\\\'"; }
+      if ( $lc2_d eq "\"" ) { $lc2_c = "\\\""; }
+      if ( $lc2_d eq "\@" ) { $lc2_c = "\\\@"; }
+      if ( $lc2_d eq "\\" ) { $lc2_c = "\\\\"; }
       $lc2_b = $lc2_c . $lc2_b;
     }
     return $lc2_b;
