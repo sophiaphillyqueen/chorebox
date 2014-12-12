@@ -20,19 +20,26 @@ sub meaning_of {
   my @lc_a;
   my @lc_b;
   
+  if ( $_[0] eq "" ) { return ""; }
+  
   @lc_a = split(/:/,$_[0],2);
+  
+  if ( $lc_a[0] eq "" ) { return &meaning_of($lc_a[1]); }
+  if ( $lc_a[0] eq "x" ) { return ""; }
   
   if ( $lc_a[0] eq "l" )
   {
     my $lc2_a;
-    ($lc2_a) = split(/:/,$lc_a[1]);
+    my $lc2_b;
+    ($lc2_a,$lc2_b) = split(/:/,$lc_a[1],2);
     if ( $lc2_a ne $lc_a[1] )
     {
       &devel_err_aa("A \"l\"-type string encounters a colon."
-        , "Be aware that the behavior of such instances will soon change."
+        , "Be aware that the behavior of such instances has recently changed."
       );
     }
-    return $lc_a[1];
+    $lc2_a .= &meaning_of($lc2_b);
+    return $lc2_a;
   }
   
   if ( $lc_a[0] eq "lit" )
@@ -43,19 +50,37 @@ sub meaning_of {
   
   if ( $lc_a[0] eq "var" )
   {
-    @lc_b = split(/:/,$lc_a[1]);
+    @lc_b = split(/:/,$lc_a[1],2);
+    if ( $lc_b[1] ne "" )
+    {
+      &devel_err_aa("More stuff after variable name in \"var\"-type."
+        , "Be aware that the behavior of such instances will soon change."
+      );
+    }
     return $strgvars{$lc_b[0]};
   }
   
   if ( $lc_a[0] eq "env" )
   {
-    @lc_b = split(/:/,$lc_a[1]);
+    @lc_b = split(/:/,$lc_a[1],2);
+    if ( $lc_b[1] ne "" )
+    {
+      &devel_err_aa("More stuff after variable name in \"env\"-type."
+        , "Be aware that the behavior of such instances will soon change."
+      );
+    }
     return $ENV{$lc_b[0]};
   }
   
   if ( $lc_a[0] eq "dvar" )
   {
-    @lc_b = split(/:/,$lc_a[1]);
+    @lc_b = split(/:/,$lc_a[1],2);
+    if ( $lc_b[1] ne "" )
+    {
+      &devel_err_aa("More stuff after variable name in \"env\"-type."
+        , "Be aware that the behavior of such instances will soon change."
+      );
+    }
     return $valvar{$lc_b[0]};
   }
   
