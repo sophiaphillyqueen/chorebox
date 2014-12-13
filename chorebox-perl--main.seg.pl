@@ -40,10 +40,12 @@ sub procanarg {
   
   if ( $zlc eq "run" )
   {
+    &lasminuta;
     exec(@perlinga,@zla);
   }
   if ( $zlc eq "line" )
   {
+    &lasminuta;
     exec("echo",$perlings);
   }
   
@@ -60,6 +62,19 @@ sub procanarg {
   
   die "\nUnrecognized chorebox-perl option: " . $zlc . ":\n\n";
   #&zamus($zlc);
+}
+
+sub lasminuta {
+  # First we add into the search path what has been compiled
+  # into this program as the default.
+  &adincdirs(@moduleloc_buildform);
+}
+sub adincdirs {
+  my $lc_a;
+  foreach $lc_a (@_)
+  {
+    &zamus("-I" . $lc_a);
+  }
 }
 
 die "\nYou never got to the invocation of chorebox-perl.\n\n";

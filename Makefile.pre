@@ -143,6 +143,8 @@
 :eachend:
 
 
+
+
 :-:
 :-:products/chorebox-perl:
 :*: Makefile
@@ -157,10 +159,17 @@
 :*:" > products/tmp
 :->:echo "use strict;"
 :*: >> products/tmp
+
 :->:echo "my @critiray=(\"
 :echo:pls:var:perlloc:
 :*:\");"
 :*: >> products/tmp
+
+:->:echo "my @moduleloc_buildform=(\"
+:echo:pls:dvar:perl_modules:
+:*:\");"
+:*: >> products/tmp
+
 :foreach:chorebox-perl-prt:part:
   :->:echo "# line 1 \"$(srcdir)/
   :echo:var:part:
@@ -173,6 +182,8 @@
 :->:perl -c products/tmp
 :->:chmod 755 products/tmp
 :->:mv products/tmp products/chorebox-perl
+
+
 
 
 :-:
