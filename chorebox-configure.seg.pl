@@ -335,7 +335,7 @@ sub wardenize {
 {
   my $lc_a;
   $lc_a = 1;
-  while ( $lc_a < 8.5 )
+  while ( $lc_a < 9.5 )
   {
     &autom("man" . $lc_a . "dir",$valvar{"mandir"} . "/man" . $lc_a);
     &autom("man" . $lc_a . "ext","." . $lc_a);
