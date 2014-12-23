@@ -29,7 +29,6 @@ typedef struct chorebox_str_list {
   struct chorebox_str_list *nex;
 } chorebox_str_list;
 
-#include <chorebox/cml.h>
 
 // Here is where -libchorebox- stores the command-line
 extern int chorebox_argc;

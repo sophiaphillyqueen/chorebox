@@ -108,9 +108,13 @@
 :bna:x:index.html:main.css
 :redun:x:htdocs:
 
+:bna:man3set
+
 :bna:chorebox-h
-:bna:x:chorebox:chorebox/cml
+:bna:x:chorebox
 :redun:x:chorebox-h
+:::bna:x:chorebox/cml
+:::redun:x:chorebox-h
 
 :-:
 :-:all: chorebox-configure chorebox-in
