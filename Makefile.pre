@@ -108,6 +108,9 @@
 :bna:x:index.html:main.css
 :redun:x:htdocs:
 
+:bna:chorebox-h
+:bna:x:chorebox:chorebox/cml
+:redun:x:chorebox-h
 
 :-:
 :-:all: chorebox-configure chorebox-in
@@ -125,8 +128,30 @@
 :->:cp chorebox-in "$(jl_bindir)/."
 :->:mkdir -p "$(jl_libdir)"
 :->:cp products/libchorebox.a "$(jl_libdir)/."
-:->:mkdir -p "$(jl_includedir)"
-:->:cp "$(srcdir)/libchorebox/inc/chorebox.h" "$(jl_includedir)/."
+::->:mkdir -p "$(jl_includedir)"
+::->:cp "$(srcdir)/libchorebox/inc/chorebox.h" "$(jl_includedir)/."
+:setvar:hsc:l:libchorebox
+:foreach:chorebox-h:hed:
+  :setvar:x1:dvar:jl_includedir:
+  :apnvar:x1:l:/
+  :apnvar:x1:var:hed:
+  :apnvar:x1:l:.h
+  :setvar:x2:pd:var:x1:
+  :setvar:y1:dvar:srcdir:
+  :apnvar:y1:l:/
+  :apnvar:y1:var:hsc:
+  :apnvar:y1:l:/inc/
+  :apnvar:y1:var:hed:
+  :apnvar:y1:l:.h
+  :->:mkdir -p '
+  :echo:shl:var:x2:
+  :*:'
+  :->:cp '
+  :echo:shl:var:y1:
+  :*:' '
+  :echo:shl:var:x2:
+  :*:/.'
+:eachend:
 :->:cp products/chorebox-rcp-find "$(jl_farm_bindir)/."
 :->:cp products/chorebox-perl "$(jl_farm_bindir)/."
 :->:mkdir -p "$(jl_libexecdir)/chorebox/rcp-main"
@@ -312,7 +337,11 @@
 :-:
 :-:generated/process_version_query.o: generated/process_version_query.c
 :*: $(srcdir)/chorebox-in-src/chorebox-in.h
-:*: $(srcdir)/libchorebox/inc/chorebox.h
+:foreach:chorebox-h:hdf:
+  :*: $(srcdir)/libchorebox/inc/
+  :echo:var:hdf:
+  :*:.h
+:eachend:
 :->:
 :echo:var:compile:
 :*: -o generated/process_version_query.o
@@ -386,7 +415,11 @@
 	:echo:var:chore-c:
 	:*:.c
 	:*: $(srcdir)/chorebox-in-src/chorebox-in.h
-	:*: $(srcdir)/libchorebox/inc/chorebox.h
+	:foreach:chorebox-h:hdf:
+	  :*: $(srcdir)/libchorebox/inc/
+	  :echo:var:hdf:
+	  :*:.h
+	:eachend:
 	:*: Makefile
 	:->:mkdir -p chorebox-in-obj
 	:->:
@@ -405,7 +438,11 @@
 	:*:.o: $(srcdir)/libchorebox/csrc/
 	:echo:var:chore-c:
 	:*:.c
-	:*: $(srcdir)/libchorebox/inc/chorebox.h
+	:foreach:chorebox-h:hdf:
+	  :*: $(srcdir)/libchorebox/inc/
+	  :echo:var:hdf:
+	  :*:.h
+	:eachend:
 	:*: Makefile
 	:->:mkdir -p lib_static-chorebox
 	:->:
