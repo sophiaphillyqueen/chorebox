@@ -60,6 +60,8 @@ my $truthiness; # Logic variable for acceptance or rejection of -certain- argume
 
 my $adendia;
 
+my @mansegs = (); # Man-page sections already supported.
+
 my %strgvars = {}; # All the string variables in thought space
 my %strarays = {};
 my @litstack = (); # Logical string-stack (array beginning = top)

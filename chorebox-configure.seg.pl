@@ -337,13 +337,45 @@ sub wardenize {
   $lc_a = 1;
   while ( $lc_a < 9.5 )
   {
-    &autom("man" . $lc_a . "dir",$valvar{"mandir"} . "/man" . $lc_a);
-    &autom("man" . $lc_a . "ext","." . $lc_a);
-    &wardenize("man" . $lc_a . "dir");
+    &manacom($lc_a);
     $lc_a = int($lc_a + 1.2);
   }
 }
 #&autom("libexecdir",$valvar{"exec_prefix"} . "/libexec");
+
+sub mantest {
+  my $lc_src;
+  my $lc_stp;
+  my $lc_chr;
+  my $lc_col;
+  
+  ($lc_src) = split(quotemeta("="),$_[0]);
+  
+  $lc_stp = 10;
+  $lc_col = "";
+  while ( $lc_stp > 5 )
+  {
+    $lc_chr = chop($lc_src);
+    $lc_col = $lc_chr . $lc_col;
+    if ( $lc_chr eq "" ) { return; }
+    if ( $lc_col eq "dir" ) { return; }
+    if ( $lc_col eq "ext" ) { return; }
+  }
+}
+
+sub manacom {
+  my $lc_oldone;
+  
+  if ( $_[0] eq "" ) { return; }
+  foreach $lc_oldone (@mansegs)
+  {
+    if ( $lc_oldone eq $_[0] ) { return; }
+  }
+  &autom("man" . $_[0] . "dir",$valvar{"mandir"} . "/man" . $_[0]);
+  &autom("man" . $_[0] . "ext","." . $_[0]);
+  &wardenize("man" . $_[0] . "dir");
+  @mansegs = (@mansegs,$_[0]);
+}
 
 
 
