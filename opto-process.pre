@@ -1,3 +1,12 @@
+
+::# Standard processing of options - including calculations
+::# regarding the debug-status of many programs. Resultant
+::# data is stored in-world to be accessed in the overloom
+::# script by calls designed to read variables in subservient
+::# worlds.
+
+
+
 :setvar:compile:l:gcc
 :varfromopt:compile:CC:gcc
 :::apnvar:compile:l: '-I$(includedir)'
