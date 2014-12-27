@@ -139,6 +139,12 @@ sub try_process_argum {
     return;
   }
   
+  # Now we exempt specific options that are otherwise not given
+  # any special recognition by this program, but which may have
+  # standard significance to be recognized by it's auxiliary
+  # scripts.
+  if ( $lc_optnom eq "CC" ) { return; }
+  
   # If we made it this far, that is because the argument passed is
   # not a recognized option.
   die "\nCAN NOT YET HANDLE OPTION:\n  " . $_[0] . ":\n\n";
@@ -474,7 +480,7 @@ sub load_script_file {
   }
   
   @used_scrips = ();
-  $make_indx = 0;
+  $make_indx = -1;
   
 }
 
@@ -492,8 +498,8 @@ sub load_script_file {
 }
 print DST "\n";
 
-
 # And we now do the main looping through the recipe ....
+$make_indx = 0;
 while ( $make_indx < ( $make_length - 0.5 ) )
 {
   $adendia = "";

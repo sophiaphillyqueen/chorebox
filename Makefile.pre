@@ -28,6 +28,8 @@
 :redun:x:extra-recipes:
 :bna:x:standard-doc-install.pre:standard-doc-uninstall.pre:standard-doc-all.pre
 :redun:x:extra-recipes:
+:bna:x:opto-process.pre
+:redun:x:extra-recipes:
 :bna:future-rcp
 :redun:extra-recipes:future-rcp:
 :wrlry:installworld:recipes:extra-recipes:

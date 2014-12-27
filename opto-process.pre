@@ -1,0 +1,37 @@
+:setvar:compile:l:gcc
+:varfromopt:compile:CC:gcc
+:::apnvar:compile:l: '-I$(includedir)'
+
+:setvar:cdbg:l:off
+:varfromopt:cdbg:--devel_main:irp
+:varfromopt:cdbg:--devel_e:irp
+:varfromopt:cdbg:--devel_e_c:irp
+
+:stack:var:cdbg:
+:stack:l:off
+:ifsame-to:cdbg-off:
+:apnvar:compile:l: -Wall -Werror
+:label:cdbg-off:
+:clearstack:
+
+
+
+
+:: # Now we process the question of whether CHBC files
+:: # get translated to C, or whether the intermediate
+:: # C files are used as the source of this build.
+
+:setvar:dvl_chbc:l:off
+:varfromopt:dvl_chbc:--devel_main:irp
+:varfromopt:dvl_chbc:--devel_chbc:irp
+
+:setvar:interm_src_l_dir:dvar:srcdir
+:setvar:interm_src_s_dir:l:$(srcdir)
+:stack:var:dvl_chbc
+:stack:l:off
+:ifsame-to:no-make-intermed:
+:setvar:interm_src_l_dir:l:.
+:setvar:interm_src_s_dir:l:.
+:label:no-make-intermed:
+:clearstack:
+

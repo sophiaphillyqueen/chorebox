@@ -262,6 +262,41 @@ sub meaning_of {
     return $lc2_b;
   }
   
+  # The "world" meaning-type reads a string from a subservient world.
+  # The first argument specifies the name of the world, and the second
+  # specifies the name of the string within that world.
+  if ( $lc_a[0] eq "world" )
+  {
+    my $lc2_a;
+    my $lc2_b;
+    @lc_b = split(/:/,$lc_a[1],3);
+    $lc2_a = $world_matrices{$lc_b[0]};
+    if ( ref($lc2_a) != "HASH" )
+    {
+      die "\nFATAL ERROR:\n  Invalid world specified.\n  \""
+        . $recipe_file . "\" in line " . int($make_indx + 1.2)
+        . ":\n  " . $make_lines[$make_indx] . "\n\n"
+    ;
+    }
+    $lc2_b = $lc2_a->{"strings"};
+    if ( ref($lc2_b) != "HASH" )
+    {
+      die "\nFATAL ERROR:\n  That world seems to be missing it\'s strings.\n  \""
+        . $recipe_file . "\" in line " . int($make_indx + 1.2)
+        . ":\n  " . $make_lines[$make_indx] . "\n\n"
+    ;
+    }
+    if ( !($lc2_b->{$lc_b[1]}) )
+    {
+      die "\nFATAL ERROR:\n  The specified string does not seem to exist"
+        . " in that world.\n  \""
+        . $recipe_file . "\" in line " . int($make_indx + 1.2)
+        . ":\n  " . $make_lines[$make_indx] . "\n\n"
+    ;
+    }
+    return ($lc2_b->{$lc_b[1]});
+  }
+  
   if ( $lc_a[0] eq "perl-l" ) { return &$r__perl_l_exe(&meaning_of($lc_a[1])); }
   if ( $lc_a[0] eq "perl-i" ) { return &$r__perl_i_exe(&meaning_of($lc_a[1])); }
   if ( $lc_a[0] eq "bin-l" ) { return &$r__bin_l_exe(&meaning_of($lc_a[1])); }
