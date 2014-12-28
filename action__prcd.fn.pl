@@ -127,6 +127,32 @@ sub blank_world {
   return $lc_a;
 }
 
+# The following function copies one world to another.
+# It throws a fatal-error if the first-named world
+# does not exist.
+# To implement a meaning-of type world-naming, there
+# is a double-colon separating the argument-cluster
+# for naming the first world from that naming the
+# second one.
+sub action__wrlcpy {
+  my @lc_multarg;
+  my $lc_firstworld;
+  my $lc_secondworld;
+  my $lc_crioworld;
+  @lc_multarg = split(quotemeta("::"),$_[0]);
+  $lc_firstworld = &meaning_of($lc_multarg[0]);
+  $lc_secondworld = &meaning_of($lc_multarg[1]);
+  if ( ref($world_matrices{$lc_firstworld}) ne "HASH" )
+  {
+    die "\nFATAL ERROR:\n  No such world: " . $lc_firstworld . ":\n  \""
+      . $recipe_file . "\" in line " . int($make_indx + 1.2)
+      . ":\n  " . $make_lines[$make_indx] . "\n\n"
+    ;
+  }
+  $lc_crioworld = encode_json($world_matrices{$lc_firstworld});
+  $world_matrices{$lc_secondworld} = decode_json($lc_crioworld);
+}
+
 # The following function assigns a value to a specific variable of
 # a specific world based on a meaning-of expression. It is all
 # single-colon separated arguments. The first argument is the name

@@ -135,6 +135,13 @@ sub act_by_line {
     return;
   }
   
+  # see action__prcd.fn.pl
+  if ( $lc_a[1] eq "wrlcpy" )
+  {
+    &action__wrlcpy($lc_a[2]);
+    return;
+  }
+  
   if ( $lc_a[1] eq "wrlry" )
   {
     &action__wrlry($lc_a[2]);
