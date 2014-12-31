@@ -18,7 +18,7 @@ If it's a system-wide installation you want, rather than just
 on your individual account, the litany is as follows:
 
     git clone http://github.com/sophiaphillyqueen/chorebox
-    cd chorebox && ./configure && make install
+    cd chorebox && ./configure && sudo make install
 
 ## Installation of chorebox-based packages ##
 
@@ -38,7 +38,7 @@ If it's a system-wide installation you want, rather than just
 on your individual account, the litany is as follows:
 
     git clone http://github.com/<developer>/</project>
-    cd <project> && sh configure && make install
+    cd <project> && sh configure && sudo make install
 
 ## And what is this talk of "developer mode"? ##
 
@@ -57,3 +57,9 @@ In non-developer mode, the build will just use the intermediate
 source-files and leave it at that --- while in developer mode,
 the installation will build all the way from core source
 (which will result in the intermediate sources being updated).
+
+## More documentation ##
+
+There are plans in the works to put together
+Unix-style manual-pages for many things related
+to chorebox.
