@@ -38,7 +38,7 @@ If it's a system-wide installation you want, rather than just
 on your individual account, the litany is as follows:
 
     git clone http://github.com/<developer>/</project>
-    cd <project> && sh configure && sudo make install
+    cd <project> && sh configure && make && sudo make install
 
 ## And what is this talk of "developer mode"? ##
 

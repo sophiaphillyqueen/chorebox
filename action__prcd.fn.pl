@@ -199,6 +199,32 @@ sub action__wrlry {
   $world_matrices{$lc_worldnom}->{"arrays"}->{$lc_rynom} = decode_json($lc_rycon);
 }
 
+# The "rwrlry" directive does the reverse of "wrlry".
+# Argument 0 is still the name of a world, and Argument
+# 1 is still the name of an array within that world
+# - and argument 2 is still the name of an array in this
+# world. But instead of copying the this-world array to
+# the other-world array, the other-world array gets
+# copied to this world.
+# WARNING: This function is still untested:
+sub action__rwrlry {
+  my @lc_arg;
+  my $lc_wrldnom;
+  my $lc_rynom;
+  my $lc_local;
+  my $lc_refrens;
+  my @lc_arref;
+  
+  @lc_arg = split(/:/,$_[0]);
+  $lc_wrldnom = $lc_arg[0];
+  $lc_rynom = $lc_arg[1];
+  $lc_local = $lc_arg[2];
+  
+  $lc_refrens = $world_matrices{$lc_wrldnom}->{"arrays"}->${$lc_rynom};
+  @lc_arref = @$lc_refrens;
+  $strarays{$lc_local} = [@lc_arref];
+}
+
 sub action__prvw {
   my $lc_varbol;
   my $lc_cryptval;

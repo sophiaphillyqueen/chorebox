@@ -30,6 +30,8 @@
 :redun:x:extra-recipes:
 :bna:x:opto-process.pre
 :redun:x:extra-recipes:
+:bna:x:libworld-setup.pre:libworld-addlib.pre
+:redun:x:extra-recipes:
 :bna:future-rcp
 :redun:extra-recipes:future-rcp:
 :wrlry:installworld:recipes:extra-recipes:

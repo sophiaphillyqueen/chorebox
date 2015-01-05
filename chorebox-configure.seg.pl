@@ -266,6 +266,23 @@ sub try_process_argum {
 
 
 
+sub invalid_name {
+  my $lc_a;
+  
+  ($lc_a) = split(/:/,$_[0]);
+  if ( $lc_a != $_[0] ) { return ( 2 > 1 ); }
+  
+  ($lc_a) = split(quotemeta("\n"),$_[0]);
+  if ( $lc_a != $_[0] ) { return ( 2 > 1 ); }
+  
+  ($lc_a) = split(quotemeta(" "),$_[0]);
+  if ( $lc_a != $_[0] ) { return ( 2 > 1 ); }
+  
+  return ( 1 > 2 );
+}
+
+
+
 # Now we also must deal with the jailing.
 &autom("jaildir","");
 sub wardenize {

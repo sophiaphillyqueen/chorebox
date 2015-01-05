@@ -103,4 +103,7 @@ my $r__bin_i_exe = \&f__uninitiated;
 my $r__perl_install = \&f__uninitiated;
 my $r__bin_install = \&f__uninitiated;
 
+# This is the variable for storing delay-print directives.
+my $texbufvar = "";
+
 

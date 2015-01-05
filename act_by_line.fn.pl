@@ -75,6 +75,39 @@ sub act_by_line {
     return;
   }
   
+  
+  if ( $lc_a[1] eq "prsave" )
+  {
+    my @lc2_a;
+    @lc2_a = split(/:/,$lc_a[2]);
+    $strgvars{$lc2_a[0]} = $texbufvar;
+    system("echo","  Delay-print buffer saved to thought variable: " . $lc2_a[0] . ":");
+    return;
+  }
+  if ( $lc_a[1] eq "prload" )
+  {
+    my @lc2_a;
+    @lc2_a = split(/:/,$lc_a[2]);
+    $texbufvar = $strgvars{$lc2_a[0]};
+    system("echo","  Delay-print buffer loaded from thought variable: " . $lc2_a[0] . ":");
+    return;
+  }
+  if ( $lc_a[1] eq "%" )
+  {
+    my $lc_a;
+    $lc_a = $adendia;
+    $adendia = "";
+    
+    &act_by_line("ix:" . $lc_a[2]);
+    $texbufvar .= $adendia;
+    
+    $adendia = $lc_a;
+    return;
+  }
+  
+  
+  
+  
   if ( $lc_a[1] eq "setvar" )
   {
     my @lc2_a;
@@ -85,6 +118,44 @@ sub act_by_line {
     system("echo","  Thought variable: " . $lc2_a[0] . ": = " . $lc2_b . ":");
     return;
   }
+  
+  if ( $lc_a[1] eq "nsetvar" )
+  {
+    my @lc2_a;
+    my $lc2_b;
+    my $lc2_count;
+    my $lc2_name;
+    @lc2_a = split(/:/,$lc_a[2],3);
+    $lc2_b = &meaning_of($lc2_a[2]);
+    
+    $lc2_name = $lc2_a[0];
+    $lc2_count = $lc2_a[1];
+    while ( $lc2_count > 0.5 )
+    {
+      my $lc3_n;
+      $lc3_n = $lc2_name;
+      $lc2_name = $strgvars{$lc3_n};
+      
+      if ( $lc2_name eq "" )
+      {
+        &devel_err_xaa("There is no such thought-variable as: " . $lc3_n . ":");
+      }
+      if ( &invalid_name($lc2_name) )
+      {
+        &devel_err_xaa("Invalid thought-variable name: " . $lc2_name . ":");
+      }
+      
+      $lc2_count = int($lc2_count - 0.8);
+    }
+    
+    $strgvars{$lc2_name} = $lc2_b;
+    system("echo","  Thought variable: " . $lc2_name . ": = " . $lc2_b . ":");
+    return;
+  }
+  
+  
+  
+  
   
   if ( $lc_a[1] eq "varfromopt" )
   {
@@ -129,6 +200,7 @@ sub act_by_line {
   }
   
   
+  # see action__prcd.fn.pl
   if ( $lc_a[1] eq "wrlvr" )
   {
     &action__wrlvr($lc_a[2]);
@@ -232,6 +304,58 @@ sub act_by_line {
     }
   }
   
+  if ( $lc_a[1] eq "emptyarray" )
+  {
+    my $lc2_a;
+    my @lc2_b;
+    @lc2_b = ();
+    ($lc2_a) = split(/:/,$lc_a[2]);
+    $strarays{$lc2_a} = [@lc2_b];
+    &report_array($lc2_a);
+    return;
+  }
+  
+  if ( $lc_a[1] eq "newit" )
+  {
+    my @lc2_all;
+    my $lc2_name;
+    my $lc2_cdown;
+    my $lc2_oldref;
+    my @lc2_oldray;
+    
+    @lc2_all = split(/:/,$lc_a[2],3);
+    $lc2_name = $lc2_all[0];
+    $lc2_cdown = $lc2_all[1];
+    while ( $lc2_cdown > 0.5 )
+    {
+      my $lc3_n;
+      $lc3_n = $strgvars{$lc2_name};
+      if ( $lc3_n eq "" )
+      {
+        &devel_err_xaa("Could not resolve the " . $lc2_cdown . " names after: "
+          . $lc2_name . ":")
+        ;
+      }
+      if ( &invalid_name($lc3_n) )
+      {
+        &devel_err_xaa("Not a valid variable-name from \"" . $lc2_name
+         . "\": " . $lc3_n . ":")
+        ;
+      }
+      $lc2_name = $lc3_n;
+      $lc2_cdown = int($lc2_cdown - 0.8);
+    }
+    $lc2_oldref = $strarays{$lc2_name};
+    @lc2_oldray = ();
+    if ( ref($lc2_oldref) eq "ARRAY" )
+    {
+      @lc2_oldray = @$lc2_oldref;
+    }
+    @lc2_oldray = (@lc2_oldray,&meaning_of($lc2_all[2]));
+    $strarays{$lc2_name} = [@lc2_oldray];
+    &report_array($lc2_name);
+    return;
+  }
   
   # This next item creates a new array (named by the one recognized
   # argument) which contains all the arguments that were passed to

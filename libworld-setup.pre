@@ -1,0 +1,108 @@
+
+
+::# Sets the list of static libraries as it would appear in
+::# a makefile's target-prerequisite list.
+:setvar:statireqs:l:
+
+::# Sets the list of all libraries as it would appear in
+::# a makefile's target-prerequisite list.
+:setvar:alllibreqs:l:
+
+::# A place for the full Make-code of all targets fully
+::# produced in this world
+:setvar:fulltargets:l:
+
+
+# LIBRARY-SPECIFIC OUTPUT VARIABLES
+
+::#   In descriptions such as this '<lbnm>' is meant to be
+::#   replaced by the name of the library (not-including
+::#   the obligatory "lib" prefix).
+
+::# If a string described here is a make-prerequisite, it
+::# begins with a blank-space -- for easy printing.
+
+::# l-static-<lbnm>
+::#   This string-variable is the make-prerequisite reference
+::# to the static form of the library.
+
+::# l-dynamic-<lbnm>
+::#    This string-variable is the make-prerequisite reference
+::# to the shared form of the library if that exists. Otherwise,
+::# it is the make-prerequisite reference to the static form.
+
+::# l-totalo-<lbnm>
+::#   This string-variable contains the make-prerequisite
+::# reference to the static form of the library -- and if
+::# a shared form exists, it contains the make-prerequisite
+::# reference to that as well.
+
+
+::# By the way -- if a given package/repo installs more than
+::# one library, make sure that you invoke "libworld-addlib.pre"
+::# on the library world in the proper sequence based on dependency
+::# -- that is, starting with any library that does not depend on
+::# any other within this package, and ending with the one that has
+::# the greatest number of dependencies within this package.
+:emptyarray:previolib
+
+::# Input variables of significance:
+::#
+:setvar:libname:l:
+::#     Name of the library ----- not-including the "lib" prefix that is
+::#     common to libraries.
+::#
+:setvar:prodloc:l:
+::#     Location of the directory where all product-files of this library go.
+::#     It is asked that each library have it's own designated such directory,
+::#     even if that be a sub-directory of the general "products" directory.
+::#
+:setvar:tmploc:l:
+::#     Location of temporary files specific to this libary.
+::#
+:setvar:srcloc:l:
+::#     Location of the source directory (within $(srcdir)). Within the directory
+::#     herein specified are the following subdirectories:
+::#       csrc - C source-files
+::#       inc - C header-files
+::#     And the files
+::#       config.pre
+::#
+::# Let all variables of this world that are used by the script but not
+::# meant as part of it's interface be prefixed "cl-" - short for "calculation",
+::# as these are the internal-calculation variables.
+::#
+::#
+::#
+::# The "cl-" prefix for internal-calculation variables is also a convention
+::# followed by the "config.pre" file. It sets preference variables in it's
+::# world to specify things that should be controlled from within the library's
+::# source-complex rather than the project-wide.
+::#
+::#  sharedlib
+::#     'yes' if you want to generate a shared library version of current library.
+::#     'no' if you do not want to generate a shared library version of current library.
+::#   Your choice here, of course, will only matter, if the logic for building the kind
+::#   of shared library that you seek has been implemented. Otherwise, the answer will
+::#   be treated as 'no' no matter what you select.
+::#     Oh -- and 'no' is the default here.
+::#
+::# And the following are arrays that "config.pre" generates in it's world. The
+::# "rwlry" directive is implemented specifically to allow "libworld-addlib.pre"
+::# to make use of the arrays that "config.pre" creates.
+::#
+::# c-sources
+::#    The list of files within the "csrc" directive, not-including the ".c"
+::#    at the end.
+::#
+::# c-heads
+::#    The list of this library's header-files which (as stated) are in the
+::#   "inc" directory --- not-including the ".h" at the end.
+::#
+::#
+::#
+::#
+
+
+
+
