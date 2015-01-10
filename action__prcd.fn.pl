@@ -35,6 +35,8 @@ sub action__prcd {
   $lc_spaceref = $world_matrices{$lc_spacename};
   $lc_old_regime = &pack_ab_backup;
   
+  #system("echo","Procedural: " . $lc_scriptname); sleep(10);
+  
   # Make sure the space-reference we are dealing with is
   # a copy not the original. (Use JSON to achieve this.)
   if ( ref($lc_spaceref) eq "HASH" ) {
@@ -220,7 +222,28 @@ sub action__rwrlry {
   $lc_rynom = $lc_arg[1];
   $lc_local = $lc_arg[2];
   
-  $lc_refrens = $world_matrices{$lc_wrldnom}->{"arrays"}->${$lc_rynom};
+  #$lc_refrens = $world_matrices{$lc_wrldnom}->{"arrays"}->{$lc_rynom};
+  {
+    my $lc2_a;
+    my $lc2_b;
+    $lc2_a = $world_matrices{$lc_wrldnom};
+    
+    if ( ref($lc2_a) ne "HASH" )
+    {
+      &devel_err_xaa("No such world: " . $lc_wrldnom);
+    }
+    
+    $lc2_b = $lc2_a->{"arrays"};
+    $lc_refrens = $lc2_b->{$lc_rynom};
+    
+    if ( ref($lc_refrens) ne "ARRAY" )
+    {
+      &devel_err_xaa("The world \"" . $lc_wrldnom
+        . "\" has no such array-variable: " . $lc_rynom
+      );
+    }
+    
+  }
   @lc_arref = @$lc_refrens;
   $strarays{$lc_local} = [@lc_arref];
 }

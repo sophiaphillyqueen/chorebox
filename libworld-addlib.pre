@@ -3,38 +3,68 @@
 :prsave:cl-savo:
 :prload:fulltargets:
 
+::# We add the includen first, because it is used
+::# here in it's own right.
+:apnvar:c-libiopts:l: -I$(srcdir)/
+:apnvar:c-libiopts:var:srcloc:
+:apnvar:c-libiopts:l:/inc
+
+
+::# Now cometh the litany for running the library
+::# config-variable file.
+:setvar:cl-confile:dvar:srcdir:
+:apnvar:cl-confile:l:/
+:apnvar:cl-confile:var:srcloc:
+:apnvar:cl-confile:l:/config.pre
+:wrlvr:configura:sharedlib:l:no
+:prcd:var:cl-confile::l:configura::x
+
+
+
+::# Generate library-specific prerequisites:
+
+:setvar:cl-l-static:s:1:
+:apnvar:cl-l-static:var:prodloc:
+:apnvar:cl-l-static:l:/
+:apnvar:cl-l-static:var:libname:
+:apnvar:cl-l-static:l:.a
+
+:setvar:cl-l-dynamic:var:cl-l-static:
+:setvar:cl-l-totalo:var:cl-l-static:
+
+:setvar:x:l:l-static-
+:apnvar:x:var:libname:
+:nsetvar:x:1:var:cl-l-static:
+
+:setvar:x:l:l-dynamic-
+:apnvar:x:var:libname:
+:nsetvar:x:1:var:cl-l-dynamic:
+
+:setvar:x:l:l-totalo-
+:apnvar:x:var:libname:
+:nsetvar:x:1:var:cl-l-totalo:
+
+
+::# And let us aappend those to the full prerequisites:
+:apnvar:statireqs:var:cl-l-static:
+:apnvar:alllibreqs:var:cl-l-totalo:
+
+
+::# Now let's prerequisite the header files:
+:rwrlry:configura:c-heads:cl-alpha:
+:foreach:cl-alpha:cl-g:
+  :setvar:cl-hdrq:l: $(srcdir)/
+  :apnvar:cl-hdrq:var:srcloc:
+  :apnvar:cl-hdrq:l:/inc/
+  :apnvar:cl-hdrq:var:cl-g:
+  :apnvar:cl-hdrq:l:.h
+  
+  :apnvar:headreqs-cn:var:cl-hdrq:
+  :apnvar:headreqs-ca:var:cl-hdrq:
+:eachend:
+
+
 
 :prsave:fulltargets:
 :prload:cl-savo:
-::# Input variables of significance:
-::#
-:setvar:sharedlib:l:no
-::#     'yes' if you want to generate a shared library version of current library.
-::#     'no' if you do not want to generate a shared library version of current library.
-::#   Your choice here, of course, will only matter, if the logic for building the kind
-::#   of shared library that you seek has been implemented. Otherwise, the answer will
-::#   be treated as 'no' no matter what you select.
-::#     Oh -- and 'no' is the default here.
-::#
-:setvar:libname:l:
-::#     Name of the library ----- not-including the "lib" prefix that is
-::#     common to libraries.
-::#
-:setvar:prodloc:l:
-::#     Location of the directory where all product-files of this library go.
-::#     It is asked that each library have it's own designated such directory,
-::#     even if that be a sub-directory of the general "products" directory.
-::#
-:setvar:tmploc:l:
-::#     Location of temporary files specific to this libary.
-::#
-:setvar:srcloc:l:
-::#     Location of the source directory (within $(srcdir)). Within the directory
-::#     herein specified are the following subdirectories:
-::#       csrc - C source-files
-::#       inc - C header-files
-::#
-::# Let all variables of this world that are used by the script but not
-::# meant as part of it's interface be prefixed "cl-".
-::#
 

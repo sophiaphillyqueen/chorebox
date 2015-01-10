@@ -12,6 +12,20 @@
 ::# produced in this world
 :setvar:fulltargets:l:
 
+::# A place for the '-I' options for all libraries so far
+::# set up (including a blank-space at the beginning if it
+::# is non-empty).
+:setvar:c-libiopts:l:
+
+::# Now in prerequisite-form, all the header files that
+::# are natively written in C.
+:setvar:headreqs-cn:l:
+
+::# And now *all* C headers - even those formed from CHBC.
+:setvar:headreqs-ca:l:
+
+
+
 
 # LIBRARY-SPECIFIC OUTPUT VARIABLES
 
@@ -40,10 +54,11 @@
 
 ::# By the way -- if a given package/repo installs more than
 ::# one library, make sure that you invoke "libworld-addlib.pre"
-::# on the library world in the proper sequence based on dependency
-::# -- that is, starting with any library that does not depend on
-::# any other within this package, and ending with the one that has
-::# the greatest number of dependencies within this package.
+::# on the library world in the proper sequence based on
+::# dependency -- that is, starting with any library that does
+::# not depend on any other within this package, and ending with
+::# the one that has the greatest number of dependencies within
+::# this package.
 :emptyarray:previolib
 
 ::# Input variables of significance:
@@ -70,12 +85,14 @@
 ::#
 ::# Let all variables of this world that are used by the script but not
 ::# meant as part of it's interface be prefixed "cl-" - short for "calculation",
-::# as these are the internal-calculation variables.
+::# as these are the internal-calculation variables. The same applies also for
+::# variables who's name is just one character long.
 ::#
 ::#
 ::#
 ::# The "cl-" prefix for internal-calculation variables is also a convention
-::# followed by the "config.pre" file. It sets preference variables in it's
+::# followed by the "config.pre" file - as is the convention of single-character
+::# variable-names. It sets preference variables in it's
 ::# world to specify things that should be controlled from within the library's
 ::# source-complex rather than the project-wide.
 ::#

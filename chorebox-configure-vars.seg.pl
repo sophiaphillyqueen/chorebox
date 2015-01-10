@@ -20,6 +20,7 @@
 # ########################
 
 use File::Basename;
+use Data::Dumper;
 
 # Variables for world-process logic (subscript strategy AB)
 my $child_world = 0; # 0 for main recipe script -- 10 for all others

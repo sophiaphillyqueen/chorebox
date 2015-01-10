@@ -92,6 +92,11 @@ sub act_by_line {
     system("echo","  Delay-print buffer loaded from thought variable: " . $lc2_a[0] . ":");
     return;
   }
+  if ( $lc_a[1] eq "prclear" )
+  {
+    $texbufvar = "";
+    return;
+  }
   if ( $lc_a[1] eq "%" )
   {
     my $lc_a;
@@ -217,6 +222,12 @@ sub act_by_line {
   if ( $lc_a[1] eq "wrlry" )
   {
     &action__wrlry($lc_a[2]);
+    return;
+  }
+  
+  if ( $lc_a[1] eq "rwrlry" )
+  {
+    &action__rwrlry($lc_a[2]);
     return;
   }
   
@@ -441,7 +452,8 @@ sub act_by_line {
   
   
   die "\nUnknown Makefile Recipe Command in line " . int($make_indx + 1.2)
-    . ":\n  " . $_[0] . "\n\n";
+    . ":\n  " . $_[0]
+    . "\n\nRecipe file: " . $recipe_file . "\n\n";
   ;
 }
 

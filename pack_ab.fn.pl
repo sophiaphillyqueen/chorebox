@@ -45,7 +45,7 @@ sub pack_ab_backup {
   $lc_hsh{"child-world"} = $child_world;
   if ( $child_world > 5 )
   {
-    $lc_hsh{"parent-world"} = json_decode($parent_world);
+    $lc_hsh{"parent-world"} = decode_json($parent_world);
     $lc_hsh{"current-world-name"} = $current_world_name;
   }
   $lc_hsh{"world-matrices"} = \%world_matrices;
@@ -92,7 +92,7 @@ sub pack_ab_restore {
   $child_world = $lc_a->{"child-world"};
   if ( $child_world > 5 )
   {
-    $parent_world = json_encode($lc_a->{"parent-world"});
+    $parent_world = encode_json($lc_a->{"parent-world"});
     $current_world_name = $lc_a->{"current-world-name"};
   } else {
     $parent_world = "";

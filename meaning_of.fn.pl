@@ -269,6 +269,7 @@ sub meaning_of {
   {
     my $lc2_a;
     my $lc2_b;
+    print "Okay: " . $make_lines[$make_indx] . "\n"; # debug
     @lc_b = split(/:/,$lc_a[1],3);
     $lc2_a = $world_matrices{$lc_b[0]};
     if ( ref($lc2_a) != "HASH" )
@@ -286,14 +287,18 @@ sub meaning_of {
         . ":\n  " . $make_lines[$make_indx] . "\n\n"
     ;
     }
-    if ( !($lc2_b->{$lc_b[1]}) )
-    {
-      die "\nFATAL ERROR:\n  The specified string does not seem to exist"
-        . " in that world.\n  \""
-        . $recipe_file . "\" in line " . int($make_indx + 1.2)
-        . ":\n  " . $make_lines[$make_indx] . "\n\n"
-    ;
-    }
+    
+    # The following error-generator was removed due to
+    # critical misfirings.
+    #if ( !($lc2_b->{$lc_b[1]}) )
+    #{
+    #  die "\nFATAL ERROR:\n  The specified string does not seem to exist"
+    #    . " in that world.\n  \""
+    #    . $recipe_file . "\" in line " . int($make_indx + 1.2)
+    #    . ":\n  " . $make_lines[$make_indx] . "\n\n"
+    #;
+    #}
+    
     return ($lc2_b->{$lc_b[1]});
   }
   
@@ -304,10 +309,11 @@ sub meaning_of {
   
   if ( $lc_a[0] eq "bl" ) { return ""; }
   
-  die "\nUnknown complex string-type: \""
-    . $lc_a[0] . "\" in line " . int($make_indx + 1.2)
-    . ":\n  " . $make_lines[$make_indx] . "\n\n"
-  ;
+  #die "\nUnknown complex string-type: \""
+  #  . $lc_a[0] . "\" in line " . int($make_indx + 1.2)
+  #  . ":\n  " . $make_lines[$make_indx] . "\n\n"
+  #;
+  &devel_err_xaa("Unknown complex string-type: \"" . $lc_a[0] . "\"");
 }
 
 
