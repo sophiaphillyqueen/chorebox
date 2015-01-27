@@ -2,6 +2,14 @@
 
 Configuration system for -chorekeeper- and related projects.
 
+_NOTE:_ This repository is of attempt #1 at building chorebox.
+To fix a bug, an alternate repository has built that imports
+a lot of the code from this repository, but not all of it.
+
+The present location of the  new repository of Chorebox is:
+<a href = "https://github.com/sophiaphillyqueen/chorbox-02" target = "_blank">https://github.com/sophiaphillyqueen/chorbox-02</a>
+However, it will be moved to the main location when it is a bit closer to becoming stable.
+
 ## Installation of main chorebox package ##
 
 To install chorebox, the following litany should work:
@@ -18,7 +26,7 @@ If it's a system-wide installation you want, rather than just
 on your individual account, the litany is as follows:
 
     git clone http://github.com/sophiaphillyqueen/chorebox
-    cd chorebox && ./configure && sudo make install
+    cd chorebox && ./configure && make && sudo make install
 
 ## Installation of chorebox-based packages ##
 
@@ -57,6 +65,12 @@ In non-developer mode, the build will just use the intermediate
 source-files and leave it at that --- while in developer mode,
 the installation will build all the way from core source
 (which will result in the intermediate sources being updated).
+
+## What other chorebox-based projects are sub-parts of the chorebox project itself? ##
+
+Not every project that is chorebox-based is necessarily part of the
+chorebox itself -- but some are. Chorebox is *not* limited to
+just this base package. Here are some packages that depend on Chorebox.
 
 ## More documentation ##
 
