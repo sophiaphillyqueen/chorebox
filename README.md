@@ -2,13 +2,11 @@
 
 Configuration system for -chorekeeper- and related projects.
 
-_NOTE:_ This repository is of attempt #1 at building chorebox.
-To fix a bug, an alternate repository has built that imports
-a lot of the code from this repository, but not all of it.
-
-The present location of the  new repository of Chorebox is:
-<a href = "https://github.com/sophiaphillyqueen/chorbox-02" target = "_blank">https://github.com/sophiaphillyqueen/chorbox-02</a>
-However, it will be moved to the main location when it is a bit closer to becoming stable.
+_NOTE:_ This repository was *going* to give way to another
+repository for -chorebox- --- however, as the bug that was
+threatening to derail -chorebox- has been resolved, this
+repository will remain the place from which the project is
+continued.
 
 ## Installation of main chorebox package ##
 
