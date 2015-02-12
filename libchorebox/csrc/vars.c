@@ -20,8 +20,8 @@
 #include <chorebox.h>
 
 
-int chorebox_argc;
-char **chorebox_argv;
-char **chorebox_env;
+int chorebox_argc = 0;
+char **chorebox_argv = NULL;
+char **chorebox_env = NULL;
 
 
