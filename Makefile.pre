@@ -258,13 +258,16 @@
   :echo:var:chor-c:
   :*:.o
 :eachend:
+:->:rm -rf temprary
+:->:mkdir -p temprary
 :->:mkdir -p products
-:->:ar -cvq products/libchorebox.a
+:->:ar -cvq temprary/libchorebox.a
 :foreach:lib--chorebox--c:chor-c:
   :*: "lib_static-chorebox/
   :echo:var:chor-c:
   :*:.o"
 :eachend:
+:->:cp temprary/libchorebox.a products/.
 
 :-:
 :-:install-html: all-html
@@ -338,6 +341,7 @@
 ::# Eventually, all installables from this package will be
 ::# placed in the "products" directory. Eventually.
 :->:echo "products/" >> git-ignore-tmp
+:->:echo "temprary/" >> git-ignore-tmp
 ::
 :->:mv git-ignore-tmp .gitignore
 
