@@ -55,9 +55,12 @@
 :apnvar:statireqs:var:cl-l-static:
 :apnvar:alllibreqs:var:cl-l-totalo:
 
+::# Let us Obtain the Arrays
+:rwrlry:configura:c-heads:cl-alpha:
+:rwrlry:configura:c-source:cl-beta:
+
 
 ::# Now let's prerequisite the header files:
-:rwrlry:configura:c-heads:cl-alpha:
 :foreach:cl-alpha:cl-g:
   :setvar:cl-hdrq:l: $(srcdir)/
   :apnvar:cl-hdrq:var:srcloc:
@@ -70,33 +73,160 @@
 :eachend:
 
 
-
-
-:rwrlry:configura:c-source:cl-c-source:
-:foreach:cl-alpha:cl-c-source:
-  :%:-:
-  :%:-:# There is a hole --- in your mind.
-  :%:-:
-  :%:-:#
+:%:-:
+:%:-:
+:%:echo:var:prodloc:
+:%:*:/lib
+:%:echo:var:libname:
+:%:*:.a:
+:foreach:cl-beta:cl-c-source:
   :%:s:1:
+  :%:echo:var:prodloc:
+  :%:*:/ofiles/
+  :%:echo:var:cl-c-source:
+  :%:*:.o
+  ::%:*: $(srcdir)/
+  ::%:echo:var:srcloc:
+  ::%:*:/
+  ::%:
+  ::%:echo:world:optoworld:compile:
+:eachend:
+:%:->:mkdir -p
+:%:s:1:
+:%:echo:var:tmploc:
+:%:->:rm -rf
+:%:s:1:
+:%:echo:var:tmploc:
+:%:->:mkdir -p
+:%:s:1:
+:%:echo:var:tmploc:
+:%:->:ar -crv
+:%:s:1:
+:%:echo:var:tmploc:
+:%:*:/lib
+:%:echo:var:libname:
+:%:*:.a
+:foreach:cl-beta:cl-c-source:
+  :%:s:1:
+  :%:echo:var:prodloc:
+  :%:*:/ofiles/
+  :%:echo:var:cl-c-source:
+  :%:*:.o
+  ::%:*: $(srcdir)/
+  ::%:echo:var:srcloc:
+  ::%:*:/
+  ::%:
+  ::%:echo:world:optoworld:compile:
+:eachend:
+:%:->:mkdir -p
+:%:s:1:
+:%:echo:var:prodloc:
+:%:s:1:
+:%:echo:var:prodloc:
+:%:->:mv
+:%:s:1:
+:%:echo:var:tmploc:
+:%:*:/lib
+:%:echo:var:libname:
+:%:*:.a
+:%:s:1:
+:%:echo:var:prodloc:
+:%:*:/.
+:%:->:rm -rf
+:%:s:1:
+:%:echo:var:tmploc:
+
+
+
+:foreach:cl-beta:cl-c-source:
+  :%:-:
+  :%:-:
+  :%:echo:var:prodloc:
+  :%:*:/ofiles/
+  :%:echo:var:cl-c-source:
+  :%:*:.o: $(srcdir)/
+  :%:echo:var:srcloc:
+  :%:*:/csrc/
+  :%:echo:var:cl-c-source:
+  :%:*:.c
+  :%:echo:var:headreqs-ca:
+  
+  :%:->:mkdir -p
+  :%:s:1:
+  :%:echo:var:tmploc:
+  :%:->:rm -rf
+  :%:s:1:
+  :%:echo:var:tmploc:
+  :%:->:mkdir -p
+  :%:s:1:
+  :%:echo:var:tmploc:
+  
+  :%:->:
   :%:echo:world:optoworld:compile:
-  :%:-:
-  :%:-:
+  :%:echo:var:c-libiopts:
+  :%:*: -L$(includedir) -c -o
+  :%:s:1:
+  :%:echo:var:tmploc:
+  :%:*:/
+  :%:echo:var:cl-c-source:
+  :%:*:.o $(srcdir)/
+  :%:echo:var:srcloc:
+  :%:*:/csrc/
+  :%:echo:var:cl-c-source:
+  :%:*:.c
+  
+  :%:->:mkdir -p
+  :%:s:1:
+  :%:echo:var:prodloc:
+  :%:*:/ofiles
+  
+  :%:->:mv
+  :%:s:1:
+  :%:echo:var:tmploc:
+  :%:*:/
+  :%:echo:var:cl-c-source:
+  :%:*:.o
+  :%:s:1:
+  :%:echo:var:prodloc:
+  :%:*:/ofiles/.
+  
+  :%:->:rm -rf
+  :%:s:1:
+  :%:echo:var:tmploc:
 :eachend:
 
 
+::# ############################# #
+::# ##  MAIN TARGET COMPLETED  ## #
+::# ############################# #
+::# That is it for the main target.
+::# Now, in the following block of code, we switch out of the main
+::# target-space so that we can start working on install instructions
+::# -- and later, on clean instructions.
 :prsave:fulltargets:
 :prload:for-install:
 
 
+:%:->:cp
+:%:s:1:
+:%:echo:var:prodloc:
+:%:*:/lib
+:%:echo:var:libname:
+:%:*:.a "$(jl_libdir)/."
 
 
 :prsave:for-install:
 :prload:for-clean:
 
-
+:%:->:rm -rf
+:%:s:1:
+:%:echo:var:prodloc:
+:%:->:rm -rf
+:%:s:1:
+:%:echo:var:tmploc:
 
 :prsave:for-clean:
 :prload:cl-savo:
 :setvar:cl-savo:l:
 
+:setvar:fullreqs:var:alllibreqs:

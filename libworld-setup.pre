@@ -1,10 +1,14 @@
 
 ::# We still must process the Optoworld:
-:setvar:optoprocess:qry:chorebox-rcp-find opto-process.pre
-:prcd:var:optoprocess::l:optoworld::x:
+:setvar:cl-optoprocess:qry:chorebox-rcp-find opto-process.pre
+:prcd:var:cl-optoprocess::l:optoworld::x:
 
 
 
+
+::# Sets the list of all targets as it would appear in
+::# a makefile's target-prerequisite list.
+:setvar:fullreqs:l:
 
 ::# Sets the list of static libraries as it would appear in
 ::# a makefile's target-prerequisite list.

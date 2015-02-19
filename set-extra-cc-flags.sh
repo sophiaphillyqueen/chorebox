@@ -95,6 +95,7 @@ rm -rf temporary--extra-options-compile.txt
 touch temporary--extra-options-compile.txt
 if [ $cur_survive = $say_no ]; then
   echo "-Wall" >> temporary--extra-options-compile.txt
+  echo "-Qunused-arguments" >> temporary--extra-options-compile.txt
   echo "-Werror" >> temporary--extra-options-compile.txt
 fi
 
