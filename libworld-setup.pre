@@ -1,4 +1,10 @@
 
+::# We still must process the Optoworld:
+:setvar:optoprocess:qry:chorebox-rcp-find opto-process.pre
+:prcd:var:optoprocess::l:optoworld::x:
+
+
+
 
 ::# Sets the list of static libraries as it would appear in
 ::# a makefile's target-prerequisite list.
@@ -17,6 +23,11 @@
 ::# is non-empty).
 :setvar:c-libiopts:l:
 
+::# A place for the '-L' options for all libraries so far
+::# set up (including a blank-space at the beginning if it
+::# is non-empty).
+:setvar:c-liblopts:l:
+
 ::# Now in prerequisite-form, all the header files that
 ::# are natively written in C.
 :setvar:headreqs-cn:l:
@@ -24,6 +35,12 @@
 ::# And now *all* C headers - even those formed from CHBC.
 :setvar:headreqs-ca:l:
 
+
+::# A place for instructions for "install" target
+:setvar:for-install:l:
+
+::# A place for instructions for "clean" target
+:setvar:for-clean:l:
 
 
 

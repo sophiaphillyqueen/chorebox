@@ -81,6 +81,12 @@ sub action__prcd {
       %strarays = %$lc2_a;
     }
     
+    $lc2_a = $lc_spaceref->{"worlds"};
+    if ( ref($lc2_a) eq "HASH" )
+    {
+      %world_matrices = %$lc2_a;
+    }
+    
     $lc2_a = $lc_spaceref->{"stack"};
     if ( ref($lc2_a) eq "ARRAY" )
     {
@@ -104,6 +110,7 @@ sub from_a__prcd {
   $lc_hsh{"strings"} = \%strgvars;
   $lc_hsh{"arrays"} = \%strarays;
   $lc_hsh{"stack"} = \@litstack;
+  $lc_hsh{"worlds"} = \%world_matrices;
   $lc_refa = \%lc_hsh;
   $lc_jase = encode_json($lc_refa);
   
@@ -123,7 +130,7 @@ sub blank_world {
   my $lc_a;
   
   $lc_a = decode_json("{" .
-    "\"strings\":{},\"arrays\":{},\"stack\":[]" .
+    "\"strings\":{},\"arrays\":{},\"stack\":[],\"worlds\":{}" .
   "}");
   
   return $lc_a;

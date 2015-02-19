@@ -9,6 +9,10 @@
 :apnvar:c-libiopts:var:srcloc:
 :apnvar:c-libiopts:l:/inc
 
+::# We must also register the location of the library.
+:apnvar:c-liblopts:l: -L
+:apnvar:c-liblopts:var:prodloc:
+
 
 ::# Now cometh the litany for running the library
 ::# config-variable file.
@@ -25,7 +29,7 @@
 
 :setvar:cl-l-static:s:1:
 :apnvar:cl-l-static:var:prodloc:
-:apnvar:cl-l-static:l:/
+:apnvar:cl-l-static:l:/lib
 :apnvar:cl-l-static:var:libname:
 :apnvar:cl-l-static:l:.a
 
@@ -36,6 +40,9 @@
 :apnvar:x:var:libname:
 :nsetvar:x:1:var:cl-l-static:
 
+
+
+
 :setvar:x:l:l-dynamic-
 :apnvar:x:var:libname:
 :nsetvar:x:1:var:cl-l-dynamic:
@@ -43,7 +50,6 @@
 :setvar:x:l:l-totalo-
 :apnvar:x:var:libname:
 :nsetvar:x:1:var:cl-l-totalo:
-
 
 ::# And let us aappend those to the full prerequisites:
 :apnvar:statireqs:var:cl-l-static:
@@ -65,6 +71,32 @@
 
 
 
+
+:rwrlry:configura:c-source:cl-c-source:
+:foreach:cl-alpha:cl-c-source:
+  :%:-:
+  :%:-:# There is a hole --- in your mind.
+  :%:-:
+  :%:-:#
+  :%:s:1:
+  :%:echo:world:optoworld:compile:
+  :%:-:
+  :%:-:
+:eachend:
+
+
 :prsave:fulltargets:
+:prload:for-install:
+
+
+
+
+:prsave:for-install:
+:prload:for-clean:
+
+
+
+:prsave:for-clean:
 :prload:cl-savo:
+:setvar:cl-savo:l:
 
