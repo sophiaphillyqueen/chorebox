@@ -164,7 +164,7 @@
   :%:->:
   :%:echo:world:optoworld:compile:
   :%:echo:var:c-libiopts:
-  :%:*: -L$(includedir) -c -o
+  :%:*: -I$(includedir) -c -o
   :%:s:1:
   :%:echo:var:tmploc:
   :%:*:/
