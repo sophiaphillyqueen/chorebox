@@ -6,7 +6,8 @@ _NOTE:_ This repository was *going* to give way to another
 repository for -chorebox- --- however, as the bug that was
 threatening to derail -chorebox- has been resolved, this
 repository will remain the place from which the project is
-continued.
+continued --- until such time as we are ready to start
+replacing the remaining PERL scripts with compiled binaries.
 
 ## Installation of main chorebox package ##
 
