@@ -44,6 +44,16 @@ char *chorebox_apend_string ( char **rg_a, char *rg_b );
 //   And the only way this will be NULL is if both <rg_b> and the
 // going-in value of <*rg_a> are NULL.
 
+bool chorebox_apend_string_rsl ( char **rg_a, char *rg_b );
+// This function resembles chorebox_apend_string() with a few
+// notable differences:
+// - This function will return to the calling program even
+// in the event of failure, provided none of the data provided
+// to it is corrupting.
+// - Instead of returning a string value, it returns a boolean
+// value -- 'true' if the operation was successful, and 'false'
+// if it was not.
+
 bool chorebox_check_cmd_file ( char *rg_a );
 // Given the filename <rg_a>, this function does the best it can
 // to determine if it is a valid location of an executable - and
