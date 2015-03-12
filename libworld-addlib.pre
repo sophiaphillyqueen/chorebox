@@ -84,7 +84,7 @@
   :%:echo:var:prodloc:
   :%:*:/ofiles/
   :%:echo:var:cl-c-source:
-  :%:*:.o
+  :%:*:.o Makefile
   ::%:*: $(srcdir)/
   ::%:echo:var:srcloc:
   ::%:*:/
@@ -148,7 +148,7 @@
   :%:echo:var:srcloc:
   :%:*:/csrc/
   :%:echo:var:cl-c-source:
-  :%:*:.c
+  :%:*:.c Makefile
   :%:echo:var:headreqs-ca:
   
   :%:->:mkdir -p

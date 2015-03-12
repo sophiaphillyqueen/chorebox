@@ -19,7 +19,7 @@
 :stack:var:cdbg:
 :stack:l:off
 :ifsame-to:cdbg-off:
-:apnvar:compile:l: -Wall -Qunused-arguments -Werror
+:apnvar:compile:l: -Wall --pedantic -Wextra -Qunused-arguments -Werror
 :label:cdbg-off:
 :clearstack:
 
